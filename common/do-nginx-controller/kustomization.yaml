@@ -3,4 +3,4 @@ kind: Kustomization
 resources:
 - install.yaml
 
-namespace: 
+namespace: ingress-nginx
