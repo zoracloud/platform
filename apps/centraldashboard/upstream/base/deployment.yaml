@@ -42,8 +42,8 @@ spec:
           value: $(CD_CONFIGMAP_NAME)
         volumeMounts:
           - mountPath: /root/.kube/config
-          - name: kubeconfig
-          - subPath: kube.conf
+            name: kubeconfig
+            subPath: kube.conf
       serviceAccountName: centraldashboard
       volumes:
       - configMap:
