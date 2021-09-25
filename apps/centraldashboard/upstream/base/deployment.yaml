@@ -19,6 +19,10 @@ spec:
       containers:
       - name: centraldashboard
         image: public.ecr.aws/j1r0q0g6/notebooks/central-dashboard
+        volumeMounts:
+          - mountPath: /root/.kube/config
+            name: kubeconfig
+            subPath: kube.conf
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -40,10 +44,6 @@ spec:
           value: $(CD_REGISTRATION_FLOW)
         - name: DASHBOARD_LINKS_CONFIGMAP
           value: $(CD_CONFIGMAP_NAME)
-        volumeMounts:
-          - mountPath: /root/.kube/config
-            name: kubeconfig
-            subPath: kube.conf
       serviceAccountName: centraldashboard
       volumes:
       - configMap:
