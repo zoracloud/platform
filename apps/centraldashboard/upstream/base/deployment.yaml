@@ -21,7 +21,7 @@ spec:
         image: public.ecr.aws/j1r0q0g6/notebooks/central-dashboard
         volumeMounts:
           - mountPath: /root/.kube/config
-            name: kubeconfig
+            name: kubeconfig-volume
             subPath: kube.conf
         imagePullPolicy: IfNotPresent
         livenessProbe:
@@ -46,7 +46,8 @@ spec:
           value: $(CD_CONFIGMAP_NAME)
       serviceAccountName: centraldashboard
       volumes:
-      - configMap:
-          defaultMode: 420
+      - name: kubeconfig-volume
+        configMap:
+          # defaultMode: 420
           name: kubeconfig
-        name: kubeconfig
+        
